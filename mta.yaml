@@ -1,8 +1,7 @@
----
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: cap-test-jwt
 version: 1.0.0
-description: "A simple CAP project."
+description: "CAP project to demonstrate the flow of JWT Token"
 parameters:
   enable-parallel-deployments: true
 build-parameters:
@@ -22,3 +21,29 @@ modules:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
           srv-url: ${default-url}
+    requires:
+      - name: cap-test-jwt-auth
+
+  - name: cap-test-jwt-approuter
+    type: approuter.nodejs
+    path: app/ # from cds.env.folders. Consider also cds.env.build.target -> gen/app
+    parameters:
+      keep-existing-routes: true
+      disk-quota: 256M
+      memory: 256M
+    requires:
+      - name: srv-api
+        group: destinations
+        properties:
+          name: srv-api # must be used in xs-app.json as well
+          url: ~{srv-url}
+          forwardAuthToken: true
+      - name: cap-test-jwt-auth
+
+resources:
+  - name: cap-test-jwt-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json

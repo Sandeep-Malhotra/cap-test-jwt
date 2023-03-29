@@ -7,7 +7,9 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^6",
-    "express": "^4"
+    "express": "^4",
+    "@sap/xssec": "^3",
+    "passport": "^0"
   },
   "devDependencies": {
     "sqlite3": "^5.0.4"
@@ -16,5 +18,15 @@
     "start": "cds run",
     "watch": "cds watch",
     "deploy": "mbt build && cf deploy mta_archives/cap-test-jwt_1.0.0.mtar --retries 1"
+  },
+  "cds": {
+    "requires": {
+      "auth": {
+        "kind": "xsuaa"
+      },
+      "approuter": {
+        "kind": "cloudfoundry"
+      }
+    }
   }
 }

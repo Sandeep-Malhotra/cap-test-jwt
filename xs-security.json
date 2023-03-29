@@ -1,0 +1,7 @@
+{
+  "xsappname": "test-cap-jwt",
+  "tenant-mode": "dedicated",
+  "scopes": [],
+  "attributes": [],
+  "role-templates": []
+}
