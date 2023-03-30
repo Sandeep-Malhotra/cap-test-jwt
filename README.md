@@ -18,7 +18,7 @@ It contains these folders and files, following our recommended project layout:
 | ---------------- | -------------------------------------------- | ---------------------- |
 | `without-uaa`    | App without XSUAA service                    | JWT token is undefined |
 | `with-uaa`       | App with XSUAA service but without Approuter | JWT token is undefined |
-| `with-approuter` | App without XSUAA service                    | JWT token is defined   |
+| `with-approuter` | App with XSUAA service and Approuter         | JWT token is defined   |
 
 ## Next Steps
 
